@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f1e8;
+            color: #34291f;
+        }
+
+        /* LOGIN */
+        #login {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            width: 350px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px #0002;
+        }
+
+        .login-box h1 {
+            color: #6b4226;
+            margin-bottom: 10px;
+        }
+
+        .login-box p {
+            margin-bottom: 20px;
+            color: #777;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            background: #6b4226;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #93633e;
+        }
+
+        .login-box button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* BIBLIOTECA */
+        #biblioteca {
+            display: none;
+        }
+
+        header {
+            background: #4a3021;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 26px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: #795438;
+        }
+
+        .banner {
+            padding: 50px 8%;
+            background: #dfcfb5;
+        }
+
+        .banner h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .banner p {
+            color: #66513e;
+        }
+
+        main {
+            padding: 30px 8%;
+        }
+
+        .ferramentas {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .ferramentas input {
+            max-width: 350px;
+            margin: 0;
+        }
+
+        .livros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px #0001;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .capa {
+            height: 230px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .capa1 {
+            background: linear-gradient(135deg, #233d35, #678779);
+        }
+
+        .capa2 {
+            background: linear-gradient(135deg, #432d50, #9677a6);
+        }
+
+        .capa3 {
+            background: linear-gradient(135deg, #8a3d32, #d78c64);
+        }
+
+        .capa4 {
+            background: linear-gradient(135deg, #203c66, #7298c4);
+        }
+
+        .capa5 {
+            background: linear-gradient(135deg, #665126, #c2a45d);
+        }
+
+        .capa6 {
+            background: linear-gradient(135deg, #542d36, #ac6a7b);
+        }
+
+        .info {
+            padding: 15px;
+        }
+
+        .info h3 {
+            margin-bottom: 8px;
+        }
+
+        .info p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .info button {
+            width: 100%;
+        }
+
+        .titulo-secao {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .banner h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <section id="login">
+        <div class="login-box">
+            <h1>📚 Biblioteca Digital</h1>
+            <p>Entre para descobrir novas histórias</p>
+
+            <input type="text" id="usuario" placeholder="Digite seu nome">
+
+            <input type="password" id="senha" placeholder="Digite sua senha">
+
+            <button onclick="entrar()">Entrar</button>
+        </div>
+    </section>
+
+    <!-- SITE DA BIBLIOTECA -->
+    <section id="biblioteca">
+
+        <header>
+            <h1>📚 Biblioteca Digital</h1>
+
+            <nav>
+                <button onclick="mostrarTodos()">Catálogo</button>
+                <button onclick="mostrarFavoritos()">Favoritos ♥</button>
+                <button onclick="sair()">Sair</button>
+            </nav>
+        </header>
+
+        <section class="banner">
+            <h2>Um universo de histórias espera por você.</h2>
+            <p>Explore livros, descubra novos autores e encontre sua próxima leitura.</p>
+        </section>
+
+        <main>
+
+            <div class="ferramentas">
+                <h2 id="tituloSecao">Catálogo de livros</h2>
+
+                <input type="text" id="pesquisa" placeholder="🔎 Buscar um livro..." oninput="pesquisarLivros()">
+            </div>
+
+            <div class="livros" id="listaLivros"></div>
+
+        </main>
+
+        <footer>
+            Biblioteca Digital © 2026
+        </footer>
+
+    </section>
+
+    <script>
+
+
+        // LISTA DE LIVROS
+        const livros = [
+            {
+                titulo: "A Biblioteca da Meia-Noite",
+                autor: "Matt Haig",
+                classe: "capa1"
+            },
+            {
+                titulo: "Harry Potter",
+                autor: "J. K. Rowling",
+                classe: "capa2"
+            },
+            {
+                titulo: "O Pequeno Príncipe",
+                autor: "Antoine de Saint-Exupéry",
+                classe: "capa3"
+            },
+            {
+                titulo: "Percy Jackson",
+                autor: "Rick Riordan",
+                classe: "capa4"
+            },
+            {
+                titulo: "A Seleção",
+                autor: "Kiera Cass",
+                classe: "capa5"
+            },
+            {
+                titulo: "Coraline",
+                autor: "Neil Gaiman",
+                classe: "capa6"
+            },
+            {
+                titulo: "É Assim que Acaba",
+                autor: "Colleen Hoover",
+                classe: "capa1"
+            },
+            {
+                titulo: "A Culpa é das Estrelas",
+                autor: "John Green",
+                classe: "capa2"
+            },
+            {
+                titulo: "Jogos Vorazes",
+                autor: "Suzanne Collins",
+                classe: "capa3"
+            },
+            {
+                titulo: "O Hobbit",
+                autor: "J. R. R. Tolkien",
+                classe: "capa4"
+            },
+            {
+                titulo: "Orgulho e Preconceito",
+                autor: "Jane Austen",
+                classe: "capa5"
+            },
+            {
+                titulo: "A Menina que Roubava Livros",
+                autor: "Markus Zusak",
+                classe: "capa6"
+            },
+            {
+                titulo: "Extraordinário",
+                autor: "R. J. Palacio",
+                classe: "capa1"
+            },
+            {
+                titulo: "Crepúsculo",
+                autor: "Stephenie Meyer",
+                classe: "capa2"
+            },
+            {
+                titulo: "O Código Da Vinci",
+                autor: "Dan Brown",
+                classe: "capa3"
+            },
+            {
+                titulo: "Dom Casmurro",
+                autor: "Machado de Assis",
+                classe: "capa4"
+            },
+            {
+                titulo: "Verity",
+                autor: "Colleen Hoover",
+                classe: "capa5"
+            },
+            {
+                titulo: "A Revolução dos Bichos",
+                autor: "George Orwell",
+                classe: "capa6"
+            }
+        ];
+
+        let favoritos = [];
+
+        // LOGIN
+        function entrar() {
+            let usuario = document.getElementById("usuario").value;
+            let senha = document.getElementById("senha").value;
+
+            if (usuario === "" || senha === "") {
+                alert("Preencha seu nome e sua senha!");
+                return;
+            }
+
+            document.getElementById("login").style.display = "none";
+            document.getElementById("biblioteca").style.display = "block";
+
+            document.getElementById("tituloSecao").innerText =
+                "Olá, " + usuario + "!";
+
+            mostrarTodos();
+        }
+
+        // SAIR
+        function sair() {
+            document.getElementById("biblioteca").style.display = "none";
+            document.getElementById("login").style.display = "flex";
+
+            document.getElementById("usuario").value = "";
+            document.getElementById("senha").value = "";
+        }
+
+        // FUNCIONALIDADE 1: CATÁLOGO
+        function mostrarTodos() {
+            document.getElementById("tituloSecao").innerText =
+                "Catálogo de livros";
+
+            document.getElementById("pesquisa").value = "";
+
+            renderizarLivros(livros);
+        }
+
+        // FUNCIONALIDADE 2: PESQUISA
+        function pesquisarLivros() {
+            let texto = document.getElementById("pesquisa")
+                .value.toLowerCase();
+
+            let resultado = livros.filter(livro =>
+                livro.titulo.toLowerCase().includes(texto) ||
+                livro.autor.toLowerCase().includes(texto)
+            );
+
+            renderizarLivros(resultado);
+        }
+
+        // FUNCIONALIDADE 3: FAVORITOS
+        function adicionarFavorito(titulo) {
+            if (favoritos.includes(titulo)) {
+                favoritos = favoritos.filter(item => item !== titulo);
+                alert("Livro removido dos favoritos!");
+            } else {
+                favoritos.push(titulo);
+                alert("Livro adicionado aos favoritos!");
+            }
+
+            renderizarLivros(livros);
+        }
+
+        function mostrarFavoritos() {
+            document.getElementById("tituloSecao").innerText =
+                "Meus livros favoritos";
+
+            document.getElementById("pesquisa").value = "";
+
+            let listaFavoritos = livros.filter(livro =>
+                favoritos.includes(livro.titulo)
+            );
+
+            renderizarLivros(listaFavoritos);
+        }
+
+        // MOSTRAR OS LIVROS NA TELA
+        function renderizarLivros(lista) {
+            let area = document.getElementById("listaLivros");
+
+            area.innerHTML = "";
+
+            if (lista.length === 0) {
+                area.innerHTML = "<p>Nenhum livro encontrado.</p>";
+                return;
+            }
+
+            lista.forEach(livro => {
+                let favorito = favoritos.includes(livro.titulo);
+
+                area.innerHTML += `
+                    <div class="card">
+
+                        <div class="capa ${livro.classe}">
+                            ${livro.titulo}
+                        </div>
+
+                        <div class="info">
+                            <h3>${livro.titulo}</h3>
+
+                            <p>Autor: ${livro.autor}</p>
+
+                            <button onclick="adicionarFavorito('${livro.titulo}')">
+                                ${favorito ? "♥ Remover favorito" : "♡ Favoritar"}
+                            </button>
+                        </div>
+
+                    </div>
+                `;
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
